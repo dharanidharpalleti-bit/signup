@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Prevent caching issues -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<title>Signup Page</title>
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #4B79A1, #283E51);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .signup-container {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 30px;
+    width: 360px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .signup-container:hover {
+    transform: translateY(-5px);
+  }
+
+  h2 {
+    color: #333;
+    margin-bottom: 25px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: border 0.2s ease;
+  }
+
+  input:focus {
+    border: 2px solid #007BFF;
+    outline: none;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  button {
+    width: 100%;
+    background: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+  }
+
+  .error-message {
+    color: #d93025;
+    font-size: 13px;
+    text-align: left;
+    margin-top: 2px;
+    display: none;
+  }
+
+  #message {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .success {
+    color: #28a745;
+  }
+
+  .error {
+    color: #d93025;
+  }
+</style>
+</head>
+<body>
+
+<div class="signup-container">
+  <h2>Signup</h2>
+
+  <label for="firstname">Full Name</label>
+  <input type="text" id="firstname" placeholder="Enter full name" />
+  <div class="error-message" id="firstnameError"></div>
+
+  <label for="email">Email Address</label>
+  <input type="email" id="email" placeholder="Enter email" />
+  <div class="error-message" id="emailError"></div>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" placeholder="Enter password" />
+  <div class="error-message" id="passwordError"></div>
+
+  <button id="signupBtn" onclick="validateSignup()">Signup</button>
+  <div id="message"></div>
+</div>
+
+<script>
+  function validateSignup() {
+    const firstname = document.getElementById('firstname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    document.querySelectorAll('.error-message').forEach(el => {
+      el.textContent = '';
+      el.style.display = 'none';
+    });
+
+    const message = document.getElementById('message');
+    message.textContent = '';
+    message.className = '';
+
+    let isValid = true;
+
+    if (!firstname) {
+      const el = document.getElementById('firstnameError');
+      el.textContent = 'Full name is required';
+      el.style.display = 'block';
+      isValid = false;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailPattern.test(email)) {
+      const el = document.getElementById('emailError');
+      el.textContent = 'Enter a valid email';
+      el.style.display = 'block';
+      isValid = false;
+    }
+
+    if (!password || password.length < 6) {
+      const el = document.getElementById('passwordError');
+      el.textContent = 'Password must be at least 6 characters';
+      el.style.display = 'block';
+      isValid = false;
+    }
+
+    if (isValid) {
+      message.textContent = 'Signup successful!';
+      message.className = 'success';
+    } else {
+      message.textContent = 'Please fix the errors above.';
+      message.className = 'error';
+    }
+  }
+</script>
+
+</body>
+</html>
