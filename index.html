@@ -1,59 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Authentication</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<title>Welcome</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="auth-container">
-    <h2 id="formTitle">
-        <span class="welcome">Welcome!</span>
-        <span class="action">Create Account</span>
-    </h2>
-
-    <p class="quote" id="quote">"Join us and unlock your potential."</p>
-
-    <form id="authForm">
-        <div class="input-group" id="nameGroup">
-            <input type="text" id="name" placeholder="Full Name">
+<div class="center-container">
+    <div class="welcome-box">
+        <h1>Welcome</h1>
+        <p class="welcome-quote">“Secure access begins with trust.”</p>
+        <div class="welcome-buttons">
+            <a href="auth.html?mode=signin" class="btn outline">Sign In</a>
+            <a href="auth.html?mode=signup" class="btn primary">Sign Up</a>
         </div>
-
-        <div class="input-group">
-            <input type="email" id="email" placeholder="Email" required>
-        </div>
-
-        <div class="input-group">
-            <input type="password" id="password" placeholder="Password" required>
-        </div>
-
-        <p class="error" id="error"></p>
-
-        <button type="submit" id="submitBtn">Sign Up</button>
-    </form>
-
-    <p class="toggle-text">
-        <span id="toggleText">Already have an account?</span>
-        <span id="toggleForm">Sign In</span>
-    </p>
-
-    <!-- CLEAN DIVIDER -->
-    <div class="divider">
-        <span>or continue with</span>
-    </div>
-
-    <!-- ICON-ONLY SOCIAL LOGIN -->
-    <div class="social-icons">
-        <div class="icon google"><i class="fab fa-google"></i></div>
-        <div class="icon facebook"><i class="fab fa-facebook-f"></i></div>
-        <div class="icon twitter"><i class="fab fa-x-twitter"></i></div>
     </div>
 </div>
 
-<script src="script.js"></script>
 </body>
 </html>

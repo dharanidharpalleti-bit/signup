@@ -1,46 +1,53 @@
+const params = new URLSearchParams(window.location.search);
+let isSignup = params.get("mode") === "signup";
+
 const formTitle = document.getElementById("formTitle");
 const toggleForm = document.getElementById("toggleForm");
-const toggleText = document.getElementById("toggleText");
-const nameGroup = document.getElementById("nameGroup");
 const nameField = document.getElementById("name");
-const emailField = document.getElementById("email");
-const passwordField = document.getElementById("password");
 const submitBtn = document.getElementById("submitBtn");
-const quote = document.getElementById("quote");
-const error = document.getElementById("error");
 
-let isSignup = true;
-
-toggleForm.onclick = () => {
-    isSignup = !isSignup;
-    error.textContent = "";
-
+/* Render form */
+function renderForm() {
     if (isSignup) {
         formTitle.innerHTML =
-            `<span class="welcome">Welcome!</span> <span class="action">Create Account</span>`;
-        quote.textContent = `"Join us and unlock your potential."`;
+            "<b>Welcome</b><br><span style='color:#1e88e5'>Create Account</span>";
         submitBtn.textContent = "Sign Up";
-        toggleText.textContent = "Already have an account?";
-        toggleForm.textContent = "Sign In";
-        nameGroup.classList.remove("hidden");
+        toggleForm.textContent = "Already have an account? Sign In";
+        nameField.style.display = "block";
     } else {
         formTitle.innerHTML =
-            `<span class="welcome">Welcome Back!</span> <span class="action">Sign In</span>`;
-        quote.textContent = `"Let's continue where you left off."`;
+            "<b>Welcome Back</b><br><span style='color:#1e88e5'>Sign In</span>";
         submitBtn.textContent = "Sign In";
-        toggleText.textContent = "Don't have an account?";
-        toggleForm.textContent = "Sign Up";
-        nameGroup.classList.add("hidden");
+        toggleForm.textContent = "Don't have an account? Sign Up";
+        nameField.style.display = "none";
     }
+}
+toggleForm.onclick = () => {
+    isSignup = !isSignup;
+    renderForm();
 };
+renderForm();
 
+/* Show toast */
+function showToast(message) {
+    let toast = document.createElement("div");
+    toast.classList.add("toast");
+    toast.innerText = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add("show"), 100);
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
+}
+
+/* Form submit */
 document.getElementById("authForm").addEventListener("submit", e => {
     e.preventDefault();
-
-    if (passwordField.value.length < 6) {
-        error.textContent = "Password must be at least 6 characters";
-        return;
-    }
-
-    alert(isSignup ? "Account created successfully!" : "Login successful!");
+    showToast(isSignup ? "Account created successfully" : "Login successful");
 });
+
+/* Google click */
+document.getElementById("googleBtn").onclick = () => {
+    showToast("Signed in with Google successfully");
+};
